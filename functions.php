@@ -1,10 +1,39 @@
 <?php
 
+//theme set up
+
+// function my_custom_theme_setup()
+// {
+//     add_theme_support('title-tag');
+//     // add_theme_support('post-thumbnails');
+
+//     register_nav_menus(
+//         array(
+//             'primary' => 'Primary Menu'
+//         )
+//     );
+
+//     register_nav_menus(
+//         array(
+//             'secondary' => 'Primary Menu2'
+//         )
+//     );
+// }
+
+// add_action('after_setup_theme', 'my_custom_theme_setup');
+
+
+
+
+//custome sidebar with widget
+
+
 function my_custom_theme_setup() {
 
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
 
+    //creating a menus
     register_nav_menus(
         array(
             'primary'   => 'Primary Menu',
