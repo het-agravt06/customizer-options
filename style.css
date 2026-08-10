@@ -3,12 +3,36 @@ Theme Name: my first custom theme
 Theme URI: https://example.com
 Author: Het Agravat
 Author URI: https://example.com
-description: My first custom WordPress theme.
-version:0.1.1
+Description: My first custom WordPress theme.
+Version: 0.1.1
 */
 
-body{
+body {
     font-family: Arial, sans-serif;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
+}
+
+.site-main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.widget-area {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.widget {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.widget-title {
+    margin-top: 0;
 }
