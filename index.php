@@ -49,6 +49,7 @@
  
         <?php endwhile; ?>
 
+        
         <!-- paginations -->
         <?php
             the_posts_pagination(
