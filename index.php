@@ -38,7 +38,23 @@
 
     <?php if (have_posts()) : ?>
         <?php while (have_posts()) : the_post(); ?>
-
+            
+        <!-- for the template tag -->
+            <h2><?php 
+                the_title();
+                the_excerpt();
+                get_header();
+                get_footer();
+                get_sidebar();
+                the_author();
+                the_author_link();
+                the_author_posts();
+                the_category();
+                the_tags(); 
+                get_permalink();
+                get_admin_url()
+            ?></h2>
+        <!-- end -->
 
             <article <?php post_class(); ?>>
                 <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
