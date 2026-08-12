@@ -7,7 +7,7 @@ Description: My first custom WordPress theme.
 Version: 0.1.1
 */
 
-body {
+/* body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -35,4 +35,35 @@ body {
 
 .widget-title {
     margin-top: 0;
+} */
+
+
+
+
+/*
+custom theme background color task
+*/
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.site-header {
+    padding: 30px;
+    background: #222;
+    color: white;
+    text-align: center;
+}
+
+.site-content {
+    min-height: 500px;
+    padding: 50px;
+}
+
+.site-footer {
+    padding: 30px;
+    background: #222;
+    color: white;
+    text-align: center;
 }

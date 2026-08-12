@@ -78,9 +78,98 @@
 //  cuatomizer api  changing content on footer 
 //  appereance->costimize->theme option ->change content 
  
-function my_theme_customize_register($wp_customize)
-{
-    // 1. Add Section
+// function my_theme_customize_register($wp_customize)
+// {
+//     // 1. Add Section
+//     $wp_customize->add_section(
+//         'my_theme_options',
+//         array(
+//             'title'    => 'Theme Options',
+//             'priority' => 30,
+//         )
+//     );
+
+//     // 2. Add Setting
+//     $wp_customize->add_setting(
+//         'footer_text',
+//         array(
+//             'default'           => '© 2026 My Website',
+//             'sanitize_callback' => 'sanitize_text_field',
+//         )
+//     );
+
+//     // 3. Add Control
+//     $wp_customize->add_control(
+//         'footer_text',
+//         array(
+//             'label'    => 'Footer Text',
+//             'section'  => 'my_theme_options',
+//             'type'     => 'text',
+//         )
+//     );
+// }
+
+// add_action(
+//     'customize_register',
+//     'my_theme_customize_register'
+// );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//background color change task
+
+
+
+/**
+ * Theme Setup
+ */
+function my_theme_setup() {
+
+    add_theme_support('title-tag');
+
+    add_theme_support('post-thumbnails');
+
+    register_nav_menus(
+        array(
+            'primary' => 'Primary Menu',
+        )
+    );
+}
+
+add_action('after_setup_theme', 'my_theme_setup');
+
+
+/* Enqueue Stylesheet*/
+
+function my_theme_scripts() {
+
+    wp_enqueue_style(
+        'my-theme-style',
+        get_stylesheet_uri()
+    );
+}
+
+add_action('wp_enqueue_scripts', 'my_theme_scripts');
+
+
+/*Customizer*/
+
+
+function my_theme_customize_register($wp_customize) {
+
+    /* Theme Options Section*/
+
     $wp_customize->add_section(
         'my_theme_options',
         array(
@@ -89,22 +178,51 @@ function my_theme_customize_register($wp_customize)
         )
     );
 
-    // 2. Add Setting
+
+    /* Footer Text Setting  */
+
     $wp_customize->add_setting(
         'footer_text',
         array(
-            'default'           => '© 2026 My Website',
+            'default'           => 'My Custom Website',
             'sanitize_callback' => 'sanitize_text_field',
         )
     );
 
-    // 3. Add Control
+
+    /* Footer Text Control */
+    
     $wp_customize->add_control(
         'footer_text',
         array(
-            'label'    => 'Footer Text',
-            'section'  => 'my_theme_options',
-            'type'     => 'text',
+            'label'   => 'Footer Text',
+            'section' => 'my_theme_options',
+            'type'    => 'text',
+        )
+    );
+
+
+    /* Background Color Setting */
+
+    $wp_customize->add_setting(
+        'theme_background_color',
+        array(
+            'default'           => '#ffffff',
+            'sanitize_callback' => 'sanitize_hex_color',
+        )
+    );
+
+
+    /* Background Color Control */
+
+    $wp_customize->add_control(
+        new WP_Customize_Color_Control(
+            $wp_customize,
+            'theme_background_color',
+            array(
+                'label'   => 'Background Color',
+                'section' => 'my_theme_options',
+            )
         )
     );
 }
@@ -114,3 +232,28 @@ add_action(
     'my_theme_customize_register'
 );
 
+
+/* Apply Custom Background Color */
+
+function my_theme_custom_colors() {
+
+    $background_color = get_theme_mod(
+        'theme_background_color',
+        '#ffffff'
+    );
+
+    ?>
+
+    <style>
+        body {
+            background-color: <?php echo esc_attr($background_color); ?>;
+        }
+    </style>
+
+    <?php
+}
+
+add_action(
+    'wp_head',
+    'my_theme_custom_colors'
+);
