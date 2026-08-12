@@ -134,8 +134,8 @@
 /**
  * Theme Setup
  */
-function my_theme_setup() {
-
+function my_theme_setup()
+{
     add_theme_support('title-tag');
 
     add_theme_support('post-thumbnails');
@@ -150,10 +150,11 @@ function my_theme_setup() {
 add_action('after_setup_theme', 'my_theme_setup');
 
 
-/* Enqueue Stylesheet*/
-
-function my_theme_scripts() {
-
+/**
+ * Enqueue Stylesheet
+ */
+function my_theme_scripts()
+{
     wp_enqueue_style(
         'my-theme-style',
         get_stylesheet_uri()
@@ -163,13 +164,14 @@ function my_theme_scripts() {
 add_action('wp_enqueue_scripts', 'my_theme_scripts');
 
 
-/*Customizer*/
-
-
-function my_theme_customize_register($wp_customize) {
-
-    /* Theme Options Section*/
-
+/**
+ * Customizer
+ */
+function my_theme_customize_register($wp_customize)
+{
+    /**
+     * Theme Options Section
+     */
     $wp_customize->add_section(
         'my_theme_options',
         array(
@@ -179,8 +181,9 @@ function my_theme_customize_register($wp_customize) {
     );
 
 
-    /* Footer Text Setting  */
-
+    /**
+     * Footer Text Setting
+     */
     $wp_customize->add_setting(
         'footer_text',
         array(
@@ -190,8 +193,9 @@ function my_theme_customize_register($wp_customize) {
     );
 
 
-    /* Footer Text Control */
-    
+    /**
+     * Footer Text Control
+     */
     $wp_customize->add_control(
         'footer_text',
         array(
@@ -202,8 +206,9 @@ function my_theme_customize_register($wp_customize) {
     );
 
 
-    /* Background Color Setting */
-
+    /**
+     * Background Color Setting
+     */
     $wp_customize->add_setting(
         'theme_background_color',
         array(
@@ -213,14 +218,42 @@ function my_theme_customize_register($wp_customize) {
     );
 
 
-    /* Background Color Control */
-
+    /**
+     * Background Color Control
+     */
     $wp_customize->add_control(
         new WP_Customize_Color_Control(
             $wp_customize,
             'theme_background_color',
             array(
                 'label'   => 'Background Color',
+                'section' => 'my_theme_options',
+            )
+        )
+    );
+
+
+    /**
+     * Text Color Setting
+     */
+    $wp_customize->add_setting(
+        'theme_text_color',
+        array(
+            'default'           => '#000000',
+            'sanitize_callback' => 'sanitize_hex_color',
+        )
+    );
+
+
+    /**
+     * Text Color Control
+     */
+    $wp_customize->add_control(
+        new WP_Customize_Color_Control(
+            $wp_customize,
+            'theme_text_color',
+            array(
+                'label'   => 'Text Color',
                 'section' => 'my_theme_options',
             )
         )
@@ -233,20 +266,26 @@ add_action(
 );
 
 
-/* Apply Custom Background Color */
-
-function my_theme_custom_colors() {
-
+/**
+ * Apply Custom Colors
+ */
+function my_theme_custom_colors()
+{
     $background_color = get_theme_mod(
         'theme_background_color',
         '#ffffff'
     );
 
+    $text_color = get_theme_mod(
+        'theme_text_color',
+        '#000000'
+    );
     ?>
 
     <style>
         body {
             background-color: <?php echo esc_attr($background_color); ?>;
+            color: <?php echo esc_attr($text_color); ?>;
         }
     </style>
 
