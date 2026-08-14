@@ -180,6 +180,7 @@ function my_theme_customize_register($wp_customize)
         )
     );
 
+    
 
     /**
      * Footer Text Setting
@@ -296,3 +297,37 @@ add_action(
     'wp_head',
     'my_theme_custom_colors'
 );
+
+
+// register new customizer option ( footer options )
+
+function add_customizer_options($wp_customize){
+        $wp_customize->add_section(
+        'footer_options',
+        array(
+            'title'    => 'footer Options',
+            'priority' => 30,
+        )
+    );
+
+    $wp_customize->add_setting(
+        'footer_text',
+        array(
+            'default'           => 'Copyright © 2026 My Website',
+            'sanitize_callback' => 'sanitize_text_field',
+            'transport'         => 'refresh',
+        )
+    );
+
+    $wp_customize->add_control(
+        'footer_text',
+        array(
+            'label'   => 'Footer Text',
+            'section' => 'footer_options',
+            'type'    => 'text',
+        )
+    );
+
+}
+
+add_action('customize_register','add_customizer_options');
